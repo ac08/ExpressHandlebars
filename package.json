@@ -1,0 +1,31 @@
+{
+  "name": "express-handlebars",
+  "version": "1.0.0",
+  "description": "Logger application using Node, Express, Handlebars, MySQL, as well as ORM principles.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ac08/ExpressHandlebars.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "express-handlebars",
+    "MVC",
+    "ORM",
+    "mySQL"
+  ],
+  "author": "Andrew Circelli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ac08/ExpressHandlebars/issues"
+  },
+  "homepage": "https://github.com/ac08/ExpressHandlebars#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
