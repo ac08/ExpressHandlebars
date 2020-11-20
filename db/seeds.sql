@@ -4,6 +4,6 @@ use burgers;
 INSERT INTO burgers
     (burger_name, devoured)
 VALUES
-    ('Cheeseburger', FALSE),
+    ('Cheese Burger', FALSE),
     ('Turkey Burger', FALSE),
     ('Salmon Burger', FALSE);

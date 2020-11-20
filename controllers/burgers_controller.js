@@ -1,54 +1,48 @@
-// *********************************************************************************
-// api-routes.js - this file offers a set of routes for displaying and saving data to the db
-// *********************************************************************************
+const express = require("express");
 
-// Dependencies
-// =============================================================
-var Character = require("../models/character.js");
+const router = express.Router();
 
-// Routes
-// =============================================================
-module.exports = function(app) {
-  // Search for Specific Character (or all characters) then provides JSON
-  app.get("/api/:characters?", function(req, res) {
-    if (req.params.characters) {
-      // Display the JSON for ONLY that character.
-      // (Note how we're using the ORM here to run our searches)
-      Character.findAll({
-        where: {
-          routeName: req.params.characters
-        }
-      }).then(function(result) {
-        return res.json(result);
-      });
+// Import the model (burger.js) to use its database functions.
+const burger = require("../models/burger.js");
+
+// Create all our routes and set up logic within those routes where required.
+router.get("/", function(req, res) {
+  burger.all(function(data) {
+    var hbsObject = {
+      burger: data
+    };
+    console.log(hbsObject);
+    res.render("index", hbsObject);
+  });
+});
+
+router.post("/api/burgers", function(req, res) {
+  burger.create([
+    "name", "sleepy"
+  ], [
+    req.body.name, req.body.sleepy
+  ], function(result) {
+    // Send back the ID of the new quote
+    res.json({ id: result.insertId });
+  });
+});
+
+router.put("/api/burgers/:id", function(req, res) {
+  var condition = "id = " + req.params.id;
+
+  console.log("condition", condition);
+
+  burger.update({
+    sleepy: req.body.sleepy
+  }, condition, function(result) {
+    if (result.changedRows == 0) {
+      // If no rows were changed, then the ID must not exist, so 404
+      return res.status(404).end();
     } else {
-      Character.findAll().then(function(result) {
-        return res.json(result);
-      });
+      res.status(200).end();
     }
   });
+});
 
-  // If a user sends data to add a new character...
-  app.post("/api/new", function(req, res) {
-    // Take the request...
-    // 'newCharacter' in client js is the request
-    var character = req.body;
-
-    // Create a routeName
-
-    // Using a RegEx Pattern to remove spaces from character.name
-    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    var routeName = character.name.replace(/\s+/g, "").toLowerCase();
-
-    // Then add the character to the database using sequelize
-    Character.create({
-      routeName: routeName,
-      name: character.name,
-      role: character.role,
-      age: character.age,
-      forcePoints: character.forcePoints
-    });
-
-    res.status(204).end();
-  });
-};
+// Export routes for server.js to use.
+module.exports = router;
