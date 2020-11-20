@@ -1,5 +1,5 @@
 {
-  "name": "express-handlebars",
+  "name": "express-handlebars-mvc",
   "version": "1.0.0",
   "description": "Logger application using Node, Express, Handlebars, MySQL, as well as ORM principles.",
   "main": "server.js",
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/ac08/ExpressHandlebars#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
     "mysql": "^2.18.1"
   }
 }

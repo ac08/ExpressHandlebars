@@ -1,0 +1,10 @@
+# Schema
+
+DROP DATABASE IF EXISTS burgers;
+CREATE DATABASE burgers;
+USE burgers;
+CREATE TABLE burgers (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  burger_name VARCHAR(50) UNIQUE NOT NULL, 
+  devoured BOOLEAN DEFAULT NULL 
+);
