@@ -2,9 +2,7 @@
 const connection = require("../config/connection.js");
 
 // Helper function for SQL syntax.
-// Let's say we want to pass 3 values into the mySQL query.
-// In order to write the query, we need 3 question marks.
-// The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
+// Helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
 // ["?", "?", "?"].toString() => "?,?,?";
 function printQuestionMarks(num) {
   let arr = [];
@@ -29,8 +27,8 @@ function objToSql(ob) {
       if (typeof value === "string" && value.indexOf(" ") >= 0) {
         value = "'" + value + "'";
       }
-      // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
-      // e.g. {sleepy: true} => ["sleepy=true"]
+      // e.g. {name: 'Cowboy Burger'} => ["name='Cowboy Burger'"]
+      // e.g. {devoured: true} => ["devoured=true"]
       arr.push(key + "=" + value);
     }
   }
@@ -42,8 +40,8 @@ function objToSql(ob) {
 // Object for all our SQL statement functions.
 const orm = {
   all: function(tableInput, cb) {
-    let queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
+    let sql = "SELECT * FROM " + tableInput + ";";
+    connection.query(sql, function(err, result) {
       if (err) {
         throw err;
       }
@@ -51,18 +49,18 @@ const orm = {
     });
   },
   create: function(table, cols, vals, cb) {
-    let queryString = "INSERT INTO " + table;
+    let sql = "INSERT INTO " + table;
 
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+    sql += " (";
+    sql += cols.toString();
+    sql += ") ";
+    sql += "VALUES (";
+    sql += printQuestionMarks(vals.length);
+    sql += ") ";
 
-    console.log(queryString);
+    console.log(sql);
 
-    connection.query(queryString, vals, function(err, result) {
+    connection.query(sql, vals, function(err, result) {
       if (err) {
         throw err;
       }
@@ -72,15 +70,15 @@ const orm = {
   },
   // An example of objColVals would be {name: burger, devoured: true}
   update: function(table, objColVals, condition, cb) {
-    let queryString = "UPDATE " + table;
+    let sql = "UPDATE " + table;
 
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
+    sql += " SET ";
+    sql += objToSql(objColVals);
+    sql += " WHERE ";
+    sql += condition;
 
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
+    console.log(sql);
+    connection.query(sql, function(err, result) {
       if (err) {
         throw err;
       }
@@ -90,5 +88,5 @@ const orm = {
   }
 };
 
-// Export the orm object for the model (cat.js).
+// Export the orm object for the model (burger.js).
 module.exports = orm;
