@@ -54,8 +54,8 @@ Below is how the directory is set up using MVC design.
 
 ### Accessing the Application
 
-* GitHub Repository
-* 
+* GitHub Repository at https://github.com/ac08/ExpressHandlebars
+* Deployed Heroku Application at 
 
 - - -
 
