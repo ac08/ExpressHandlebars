@@ -1,40 +1,52 @@
-<body>
- <h1>Burger Time!</h1>
+<div class="jumbotron border">
+  <h1>Introducing the Burger App!</h1>
+  <p class="lead">This is a logger application using Node, Express, MySQL, Handlebars and a customized ORM.</p>
+    <hr class="my-4">
+  <p>It utilizes MVC design pattern; as well as Node and MySQL to query and route data in the app. Express Handlebars is used to generate then HTML with Bootstrap.</p>
+</div>
 
-<h2>Available Burgers</h2>
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-6 card">
+      <div class="card-header font-weight-bold">
+        Available Burgers
+      </div>
+      <ul class="list-group  list-group-flush">
+        {{#each burger_data}}
+          {{#unless devoured}}
+          <li class="list-group-item">{{this.burger_name}} (ID: {{this.id}})
+            <button type="button" class="devoured btn btn-sm btn-outline-danger" id="eat-button" data-id="{{this.id}}" data-state="{{this.devour}}">-</button>
+          </li>
+          {{/unless}}
+        {{/each}}
+      </ul>
+    </div>
 
-<ul>
-  {{#each burger}}
-    {{#unless devoured}}
-      <span><strong>{{this.id}} - {{this.burger_name}}</strong></span>
-      <button type="button" class="devoured btn btn-warning" id="eat-button" data-id="{{this.id}}"
-      data-state="{{this.devour}}"><span class="fa fa-usd"></span></button>
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Burgers that you have eaten!</h2>
-
-<ul>
-  {{#each burger}}
-    {{#if devoured}}
-      <span><strong>{{this.id}} - {{this.burger_name}}</strong></span>
-      <button type="button" class="btn btn-danger" data-id="{{this.id}}"
-      data-state="{{this.devour}}"><span class="fa fa-trash"></span></button>
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Burger</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="new-burger">Burger Name:</label>
-    <input type="text" id="new-burger" name="burger_name">
+    <div class="col-6 card">
+      <div class="card-header font-weight-bold">
+        Burgers that you have eaten!
+      </div>
+      <ul class="list-group list-group-flush">
+        {{#each burger_data}}
+          {{#if devoured}}
+            <li class="list-group-item">{{this.burger_name}} (ID: {{this.id}})</li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    </div>
   </div>
+  <div class="row">
+  <div class="col-12 mt-4">
+    <form class="create-form">
+      <div class="row form-group">
+        {{!-- <label class="col3" for="new-burger">Burger Name:</label> --}}
+        <input type="text" class="col-11 form-control" id="new-burger" name="burger_name">
+        <button type="submit" class="col-1 btn btn-outline-success">+</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
 
-  <button type="submit">Add a Burger</button>
-</form>
 
 
-</body>
