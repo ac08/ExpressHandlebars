@@ -24,7 +24,7 @@ app.set("view engine", "handlebars");
 
 // Serve Heroku an HTML file for deployment
 app.get("/", function(req, res) {
-  res.json(path.join(__dirname, "/html/index.html"));
+  res.render(path.join(__dirname, "/html/index.html"));
 });
 
 // Import routes and give the server access to them.
