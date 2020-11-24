@@ -22,11 +22,6 @@ app.use(express.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Serve Heroku an HTML file for deployment
-// app.get("/", function(req, res) {
-//   res.render("public/html/index.html");
-// });
-
 // Import routes and give the server access to them.
 const routes = require("./controllers/burgers_controller.js");
 app.use(routes);
