@@ -1,4 +1,4 @@
-# Node Express Handlebars - Burger Application
+# Node Express Handlebars - BurgerEats
 
 ### Overview
 
