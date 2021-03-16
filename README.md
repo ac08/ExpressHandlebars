@@ -50,8 +50,8 @@ Below is how the directory is set up using MVC design.
 
 ### Accessing the Application
 
-- GitHub Repository at https://github.com/ac08/ExpressHandlebars
+- GitHub Repository at https://github.com/andrewcircelli/BurgerEats
 
-- Deployed Heroku Application at https://rocky-retreat-02112.herokuapp.com/
+- Deployed Heroku Application at https://andrewcircelli-heroku-burger.herokuapp.com/
 
 ---
